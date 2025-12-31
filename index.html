@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Ocean Story</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#020b12;
+  color:#e6f6ff;
+  overflow-x:hidden;
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,rgba(120,180,255,.25),transparent 60%),
+    linear-gradient(to bottom,rgba(2,11,18,.25),rgba(2,11,18,.95)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,6vw,3.6rem);
+}
+
+.hero p{
+  opacity:.85;
+  margin-top:1rem;
+}
+
+/* ================= SECTION ================= */
+.section{
+  max-width:1000px;
+  margin:auto;
+  padding:5rem 1.5rem;
+}
+
+/* ================= STORY CARD ================= */
+.story-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:32px;
+  margin-bottom:4rem;
+  box-shadow:0 40px 80px rgba(0,0,0,.45);
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s ease;
+}
+
+.story-card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.story-card img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  filter:brightness(.7);
+}
+
+.story-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:2.5rem;
+  background:linear-gradient(
+    to top,
+    rgba(2,11,18,.9),
+    rgba(2,11,18,.4),
+    transparent
+  );
+}
+
+.story-content h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:.6rem;
+}
+
+.story-content p{
+  opacity:.88;
+  line-height:1.7;
+}
+
+/* ================= MOMENT GALLERY ================= */
+.moment-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;
+  margin-bottom:3rem;
+}
+
+.moment-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
+
+.moment-card{
+  background:#07131d;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 25px 50px rgba(0,0,0,.4);
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+
+.moment-card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.moment-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.moment-info{
+  padding:1.5rem;
+}
+
+.moment-info span{
+  font-size:.8rem;
+  opacity:.6;
+}
+
+.moment-info h3{
+  margin:.4rem 0;
+  font-family:'Playfair Display',serif;
+}
+
+.moment-info p{
+  font-size:.95rem;
+  line-height:1.6;
+  opacity:.85;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:3rem;
+  opacity:.6;
+}
+
+
+
+/* MOBILE */
+@media(max-width:480px){
+  body{font-size:15px}
+  .story-card img{height:340px}
+}
+</style>
+</head>
+
+<body>
+    <!-- ================= NEW YEAR INTRO SCREEN ================= -->
+<div id="introScreen">
+    <canvas id="fireworks"></canvas>
+  
+    <div class="intro-content">
+      <h1>Happy New Year<br><span>Tyas ✨</span></h1>
+      <button id="enterBtn">Masuk</button>
+    </div>
+  </div>
+  
+  <style>
+  #introScreen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,#0a1b2a,#020b12 70%);
+    z-index:9999;
+    overflow:hidden;
+  }
+  
+  #fireworks{
+    position:absolute;
+    inset:0;
+  }
+  
+  .intro-content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    z-index:2;
+  }
+  
+  .intro-content h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.6rem,7vw,4rem);
+    margin-bottom:2rem;
+    text-shadow:0 0 30px rgba(255,255,255,.3);
+  }
+  
+  .intro-content span{
+    font-size:.85em;
+    opacity:.9;
+  }
+  
+  #enterBtn{
+    padding:.9rem 2.4rem;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.08);
+    color:#e6f6ff;
+    font-size:1rem;
+    letter-spacing:.5px;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    transition:.3s;
+  }
+  
+  #enterBtn:hover{
+    background:rgba(255,255,255,.2);
+    transform:translateY(-2px);
+  }
+  </style>
+  
+  <script>
+  /* ================= FIREWORKS CANVAS ================= */
+  const canvas = document.getElementById("fireworks");
+  const ctx = canvas.getContext("2d");
+  
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+  
+  class Particle{
+    constructor(x,y){
+      this.x=x;
+      this.y=y;
+      this.vx=(Math.random()-0.5)*6;
+      this.vy=(Math.random()-0.5)*6;
+      this.alpha=1;
+      this.size=Math.random()*3+1;
+      this.color=`hsl(${Math.random()*360},100%,60%)`;
+    }
+    update(){
+      this.x+=this.vx;
+      this.y+=this.vy;
+      this.vy+=0.05;
+      this.alpha-=0.015;
+    }
+    draw(){
+      ctx.globalAlpha=this.alpha;
+      ctx.fillStyle=this.color;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha=1;
+    }
+  }
+  
+  let particles=[];
+  
+  function explode(x,y){
+    for(let i=0;i<70;i++){
+      particles.push(new Particle(x,y));
+    }
+  }
+  
+  setInterval(()=>{
+    explode(
+      Math.random()*canvas.width,
+      Math.random()*canvas.height*0.6
+    );
+  },700);
+  
+  function animate(){
+    ctx.fillStyle="rgba(2,11,18,.2)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  
+    particles=particles.filter(p=>p.alpha>0);
+    particles.forEach(p=>{
+      p.update();
+      p.draw();
+    });
+  
+    requestAnimationFrame(animate);
+  }
+  animate();
+  
+  /* ================= ENTER BUTTON ================= */
+  document.getElementById("enterBtn").onclick=()=>{
+    const intro=document.getElementById("introScreen");
+    intro.style.transition="opacity 1.5s ease";
+    intro.style.opacity="0";
+    setTimeout(()=>intro.remove(),1500);
+  };
+  </script>
+  <!-- ================= END INTRO SCREEN ================= -->
+  
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>RECAP 2025</h1>
+    <p>iki recap adewee selama setahun sing paling berkesannn - menurut rafly</p>
+
+  </div>
+</section>
+
+<section class="section">
+
+  <!-- CARD 1 (TEXT TIDAK DIUBAH) -->
+  <div class="story-card">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
+    <div class="story-content">
+      <h2>prolog</h2>
+      <p>adewe kenal seko smp.. 2018 - 2025 dan seteruse iku karena aku emang sesayang iku mbe koee.. semoga koe juga sayang mbe aku yaa, hehe </p>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80">
+    <div class="story-content">
+      <h2>31 Desember 2025</h2>
+      <p>maaf yaaa, cuma iso nggawe ngene.. gak iso romantis kyo cowok lio sing ngasih bunga mbe gift new year. tapi aku juga gak kalah romantis kok, karena nggawe iki seko hati yang paling tulus.. wkwk</p>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <img src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=1400&q=80">
+    <div class="story-content">
+      <h2>untuk sayangkuu sing paling cantikk seduniaa</h2>
+      <p>web iki recap adewe main selama 2025 mbe opo sing tak rasakke pas main mbe koee. iki juga pengingat nk koe lali, hehe</p>
+      <p></p>
+      <p>happy reading sayangg</p>
+    </div>
+  </div>
+
+  <!-- MOMENT FOTO -->
+  <h2 class="moment-title">Our moment in 2025</h2>
+
+  <div class="moment-grid">
+
+    <div class="moment-card">
+      <div class="moment-info">
+        <span>31 Desember 2024</span>
+        <h3>akhir tahun 2024</h3>
+        <p>tahun baru wingi adewe tahun baruan bareng lohh, eling kann..</p>
+      </div>
+    </div>
+
+    <div class="moment-card">
+        <img src="foto/1.jpg">
+        <div class="moment-info">
+          <h3>iki pas adewe nk quenn</h3>
+          <p>pas iku koe maem eskrim nk quenn terus pulange nk caffe kucingg</p>
+        </div>
+      </div>
+
+    <div class="moment-card">
+      <img src="foto/2.jpg">
+      <div class="moment-info">
+        <h3>iki pas adewe nk caffe kucingg</h3>
+        <p>aku beruntung bangett iso ndelok perpaduan cewek lucu mbe kucing lucu dadi sijii.. meh lanjut ps an hpmu malah rusak gara gara kudanen.. wkwk.</p>
+        <p>sidone sesoke neh dehh</p>
+      </div>
+    </div>
+
+    <div class="moment-card">
+        <img src="foto/3.jpg">
+        <div class="moment-info">
+          <span>1 Januari 2025</span>
+          <h3>day one adewe main nk tahun 2025</h3>
+          <p>sesoke adewe maem naspad nk cedak quenn.. sing jaremu tukang parkire softspoken mbe act of service iku 😑, emange aku gakk 😠.. bar iku adewe ps an mbe nonton peemak versi indo eling gakk?.. mesti pas iku koe capek bangett, sampe keturon jugaa 🤣</p>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img src="foto/4.jpeg">
+        <div class="moment-info">
+          <span>5 Juni 2025</span>
+          <h3>bar iku, adewe suiiiii bgt gak ketemu poll idul adha</h3>
+          <p>adewe kan main happytime... aku gak ekspek koe sejago ikuu main game game sing nk knoo 😭😭.. sumpahh koe bener benerr jago bangettt.. outfitmu lucu bangett wssan.. ehh pas meh pulang seko mall kunciku malah ilang 🤣.. untung ono security</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/5.jpeg">
+        <div class="moment-info">
+          <h3>pulange adewe nk caffe</h3>
+          <p> pas nk caffe rasane gk pngen pulanggg, pngen mbe koe teruss tapi ws di kon pulang mama.. terus pulang dehh, tapi muter muter sek nk alun alun 7x kyo towaf 🤣... bar iku pulang dehh 🥲..</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/6.jpeg">
+        <div class="moment-info">
+          <h3>iki fotomu pas pulang</h3>
+          <p> padahal aku je pngen main mbe koee</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <div class="moment-info">
+          <h3>terus teruss, pas koe nk pwt</h3>
+          <p>gak ekspek bangett mama mbe bapak bakal ngolehke aku main ronooo... aaaaa seneng bgtt iso ngobrol mbe camerrrr...</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/7.jpeg">
+        <div class="moment-info">
+            <span>27 Agustus 2025</span>
+          <h3>terus adewe main neh pas muncak</h3>
+          <p>4 hari nk semarang.. koe glem marani aku.. glem nyelangi motor, nyuci bajuku, nyelangi bajumuu, handukmuu, intine ngerepoti koee.. teruss nehh pas muncakkk... iku moment paling tak terlupakannn tahun iki mbe paling berkesan nk uripkuu.. first time muncak, oponeh mbe cewek sing paling tak sayang seduniaaa selain ibuk 🥰, makasihh yaa ws ngajak aku ndelok view sing cantikkk bangett, sing gak pernah tak delok.. tapi tetep cantikan koee sii..</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/8.jpeg">
+        <div class="moment-info">
+          <h3>fotomu pas nk bc</h3>
+          <p>seneng bangett nek ndelok koe akur mbee kucinggg</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/9.jpeg">
+        <div class="moment-info">
+          <h3>bonusss</h3>
+          <p>foto cantikku pas je ngeflog.. wkwk</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/10.jpeg">
+        <div class="moment-info">
+            <span>28 Agustus 2025</span>
+          <h3>sesoke adewe main neh nk pantai</h3>
+          <p> senengggg bangett rasanee...
+            tapi iku kerosone sdiluk tokk.. tiba tiba wae aku ws meh pulang neh 🥲.</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/11.jpeg">
+        <div class="moment-info">
+            <span>29 Agustus 2025</span>
+          <h3>bar iku aku pulang dehh</h3>
+          <p> pas koe nganter aku nk stasiun, aku kroso sedihh bgtt tapi juga senenggg bgttt.. makasihhhh banget for that day karena ws nggawe aku keroso bahagiaa seumur hidup..</p>
+          <p>iki fotomu pas tangi turu ws glem nganter aku nk stasiun.. wkwk</p>
+        </div>
+      </div>
+      <div class="moment-card">
+        <img src="foto/12.jpeg">
+        <div class="moment-info">
+            <span>15 Oktober 2025</span>
+          <h3>koe renee marani akuuu</h3>
+          <p> yo ono acara nikahane  tantemu sii.. tapi aku senenggg bgttt koe nk knee..</p>
+        </div>
+        </div>
+        <div class="moment-card">
+            <img src="foto/13.jpeg">
+            <div class="moment-info">
+              <h3>koe juga ngasih aku mainan couple ikuu..</h3>
+              <p>lucuuu bgtttt... </p>
+            </div>
+          </div>
+          <div class="moment-card">
+            <img src="foto/14.jpeg">
+            <div class="moment-info">
+              <h3>makasih juga ws ngasih cokotan sing akehhh banget nk tangan mbe bahukuu 😑..</h3>
+              <p>maaf yaa, pas pulang koe udan udanan gara² aku  😅.. pas koe meh mbalek semarang kan adewe main nehh, sdilukkk bgttt.. kerosone hampaa bgtt pas koe ws pulang semarang.. 
+                kenopo yo tiap bar ketemu terus meh mbalek mestii sedihh 🥲, koe sedih juga gak?</p>
+            </div>
+        </div>
+          <div class="moment-card">
+            <img src="foto/15.jpeg">
+            <div class="moment-info">
+                <span>20 November 2025</span>
+              <h3>terus koe renee nehhhhh</h3>
+              <p> aku keroso bersalahh bgtt pas iki, koe main rene tapi gak tak jak nk ndi ndi cuma nonton mbe pelukan tok, tak cium cium terus sampe koe gak nyaman wssan.. maafff bangett pas dino ikuu 🥺..</p>
+            </div>
+          </div>
+          <div class="moment-card">
+            <img src="foto/20.jpeg">
+            <div class="moment-info">
+              <h3>maem dimsummmm</h3>
+              <p>aku juga makasihhh bangett karena koe sing nggawe aku pertama kali njajal dimsum mentai.. ternyata dimsum mentaj seenak ikuuu, oponeh maem mbe wong tersayanggg.. 
+                sekali lagi minta maaf nggo dino iku karena ws nggawe koe kurang nyaman 🙏😅.</p>
+            </div>
+        </div>
+            <div class="moment-card">
+                <img src="foto/19.jpeg">
+                <div class="moment-info">
+                  <h3>bonuss</h3>
+                  <p>cewekku pas tuku dimsumm</p>
+                </div>
+            </div>
+                <div class="moment-card">
+                    <img src="foto/16.jpeg">
+                    <div class="moment-info">
+                      <h3>bonuss</h3>
+                      <p> cewekku pas turuu</p>
+                    </div>
+                </div>
+                    <div class="moment-card">
+                        <div class="moment-info">
+                            <span>29 November 2025</span>
+                          <h3>teruss sing terakhir, adewe ketemu bulan wingi</h3>
+                          <p> padahal koe lagi sakitt tapi ngeyell bgtt terep pngen main mbe akuu 😠.. disisi lain aku dadi keroso berguna bangett karena koe mbutuhke akuu 🫶..bandell bangett  seko siang badanmu panas, dikon istirahat wae emoh 😠😠, wuuuu bandell pollll..  adewe maem nk warkop ngegas, terus koe gelem ngancani aku potong rambut.. bar iku photobooth, terus ps ann.. terus jagongan nk alun alun, ngobrol hal hal random.. </p>
+                        </div>
+                      </div>
+                      <div class="moment-card">
+                        <img src="foto/18.jpeg">
+                        <div class="moment-info">
+                          <h3>burjo ngegas</h3>
+                          <p>maaf yaa sering moto koe tanpa izinn, hehee</p>
+                        </div>
+                    </div>
+                    <div class="moment-card">
+                        <img src="foto/21.jpeg">
+                        <div class="moment-info">
+                          <h3>photobooth after potong rambutt</h3>
+                          <p>bar potong rambut adewe photoboothh</p>
+                        </div>
+                    </div>
+                    <div class="moment-card">
+                        <img src="foto/22.jpeg">
+                        <div class="moment-info">
+                          <h3>bar iku ps an dehh</h3>
+                          <p>pas ps an koe gak pngen kalah bangett, mso stikku di jupuk ben aku kalahh.. curangg bangettt.. </p>
+                        </div>
+                    </div>
+                    <div class="moment-card">
+                        <img src="foto/17.jpeg">
+                        <div class="moment-info">
+                          <h3>terus pulang</h3>
+                          <p>pulange adewe ngobrol neh nk kost sampe malem, padahal koe je sakitt.. </p>
+                          <p>(moto tanpa izin terakhir di 2025) wkwk</p>
+                        </div>
+                    </div>
+                    <div class="moment-card">
+
+                        <div class="moment-info">
+                          <span>31 Desember 2025</span>
+                          <h3>Close book</h3>
+                          <p>makasih yaaa selama setahun inii.. walaupun adewe jarang ketemu, sering berantem, aku yo sering nggawe koe badmood, marah, ngambek mbe nggawe koe gak nyaman.. iku karena aku sayangg mbe koee 🤣, maaf yaa nek semisal ekspresi sayangku gak sesuai mbe opo sing mbok pengen... tapi sayangku tulus mbe koee, aku gak pernah boong nek ngomong koe cantikkkk, lucuuu, imuttt.. iku emang koeee..
+                              meh make up, meh gak.. nek iku koee aku tetepp sayanggg. setiap ketemu opo ndelok koe kerosone kyo pertama kali seneng koe, oponeh nek ndelok matamu..  matamu iku bagian tubuhmu sing paling tak senenggg..
+                              
+                              be yourself nk ngarepkuu, gausah kuatir aku bakal ilfeel opo gakk, iku gak bakalll, aku seneng tyas sing dadi awake dewee..  
+                              
+                              makasihh selama setahun iki mbe tahun tahun sebelumnya sayanggg.. aku juga minta maaffff selama setahun iki dan tahun tahun sebelumnya..</p>
+                         
+                        </div>
+                      </div>
+                      <div class="moment-card">
+                        <div class="moment-info">
+                          <p>udu tentang tempate, tapi tentang sopo sing ono nk sampingku.</p>
+                        </div>
+                      </div>
+      </div>
+      
+
+    
+
+  </div>
+
+</section>
+
+<footer>
+  2025 • Rafly ❤ Tyas
+</footer>
+
+<script>
+/* SCROLL ANIMATION */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show");
+  });
+},{threshold:.2});
+
+document.querySelectorAll(".story-card,.moment-card")
+  .forEach(el=>observer.observe(el));
+</script>
+    
+
+</body>
+
+  
+  
+</html>
